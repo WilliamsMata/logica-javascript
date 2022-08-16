@@ -29,5 +29,74 @@
         "1, 2, 3, 4, 5"
       </li>
     </ol>
+    <script>
+      //Funcion que invierta palabras de una cadena de texto:
+      const invertirCadena = (texto = "") => {
+        if (!texto) return console.warn("No introdujo un texto");
+
+        if (typeof texto === "number")
+          return console.warn("Debe introducir una cadena de texto");
+
+        let nuevaCadena = "";
+        for (let i = texto.length - 1; i >= 0; i--) nuevaCadena += texto[i];
+        console.log(nuevaCadena);
+      };
+
+      invertirCadena("Esto va a salir a la inverza");
+
+      //Funcion para contar el número de veces que se repite una palabra en un texto largo.
+      const contarVeces = (texto = "", buscar = "") => {
+        if (!texto) return console.warn("Introduzca el texto");
+
+        if (!buscar) {
+          console.log(texto);
+          return console.warn("Introduzca la palabra que desea buscar");
+        }
+
+        let textoLower = texto.toLowerCase();
+        let buscarLower = buscar.toLowerCase();
+        let textoToArray = textoLower.split(" ");
+        let contador = 0;
+
+        for (let i = 0; i < textoToArray.length; i++)
+          if (textoToArray[i].includes(buscarLower)) contador++;
+
+        console.log(contador);
+      };
+
+      contarVeces("hola mundo adios mundo", "mundo");
+
+      //Función que valide si una palabra o frase dada es un palíndromo.
+      const palindromo = (texto) => {
+        if (!texto) return console.warn("Introduzca un texto");
+
+        //Eliminando espacios en blanco:
+        let textoReplace = texto.replace(/ /g, "");
+        //Convirtiendo a minusculas
+        let textoLower = textoReplace.toLowerCase();
+
+        //Creando texto inverso
+        let textoInverso = "";
+        for (let i = textoLower.length - 1; i >= 0; i--)
+          textoInverso += textoLower[i];
+
+        //Verificando si es un palindromo.
+        textoLower === textoInverso ? console.log(true) : console.log(false);
+      };
+
+      palindromo("No traces en ese carton");
+
+      //Función que elimine cierto patrón de caracteres de un texto dado.
+      const eliminandoPatron = (texto, patron) => {
+        regex = new RegExp(patron, "gi");
+        !texto
+          ? console.warn("Introduzca un texto")
+          : !patron
+          ? console.warn("Introduzca el patron para eliminar del texto")
+          : console.log(texto.replace(regex, ""));
+      };
+
+      eliminandoPatron("xyz1, xyz2, xyz3, xyz4, xyz5", "xyz");
+    </script>
   </body>
 </html>
