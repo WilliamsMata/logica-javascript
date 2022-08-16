@@ -37,7 +37,7 @@
           try {
             if (isNaN(cadena)) {
               console.log(
-                `El numero de caracteres de la cadena ${cadena} es de ${cadena.length} caracteres`
+                `El numero de caracteres de la cadena "${cadena}" es de ${cadena.length} caracteres.`
               );
             } else {
               throw new Error("No es una cadena");
@@ -62,11 +62,11 @@
       cortarCadena("Este texto sera recortado", 10);
 
       //Crear una funcion que separe un cadena de texto en un arreglo
-      const separarCadena = (cadena, caracter) => {
-        if (typeof cadena != "string" && typeof caracter != "string") {
+      const separarCadena = (cadena, separador) => {
+        if (typeof cadena != "string" && typeof separador != "string") {
           console.warn("El dato que introdujo no es una cadena de texto");
         } else {
-          console.log(cadena.split(caracter));
+          console.log(cadena.split(separador));
         }
       };
 
@@ -75,16 +75,16 @@
       //Crear una funcion que repita una cadena de texto las veces que se le indique.
       const repetirCadena = (cadena, repetir) => {
         if (typeof cadena != "string") {
-          console.warn("No introdujo una cadena de texto");
+          return console.warn("No introdujo una cadena de texto");
         } else if (typeof repetir != "number") {
-          console.warn("La cantidad a repetir debe ser un numero");
+          return console.warn("La cantidad a repetir debe ser un numero");
         } else {
           cadena = cadena + " ";
           console.log(cadena.repeat(repetir));
         }
       };
 
-      repetirCadena("quiero repetir esto tantas veces", 5);
+      repetirCadena("quiero repetir esto tantas veces", 4);
     </script>
   </body>
 </html>
