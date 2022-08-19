@@ -23,6 +23,33 @@
         devolverá 35 años (en 2020).
       </li>
     </ol>
-    <script></script>
+    <script>
+      //Funcion para convertir números de base binaria a decimal y viceversa.
+      const convertir = (numero = undefined, base = undefined) => {
+        if (numero === undefined)
+          return console.warn("Introduzca un numero y su base");
+
+        if (typeof numero !== "number")
+          return console.error("Debe introducir un numero");
+
+        if (base === undefined)
+          return console.warn("Introduzca la base del número");
+
+        if (typeof base !== "number")
+          return console.error("La base debe ser colocada en numeros");
+
+        if (base === 10)
+          return console.log(
+            `(${numero})10 es igual a (${numero.toString(2)})2`
+          );
+
+        console.log(
+          `(${numero})${base} es igual a (${parseInt(numero, base)})10`
+        );
+      };
+
+      convertir(4, 10);
+      convertir(100, 2);
+    </script>
   </body>
 </html>
