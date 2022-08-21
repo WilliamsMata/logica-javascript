@@ -50,6 +50,33 @@
 
       convertir(4, 10);
       convertir(100, 2);
+
+      //Funcion que devuelva el monto final despues de aplicar un descuento a una cantidad data
+      const descuento = (numero = undefined, porcentaje = undefined) => {
+        if (numero === undefined)
+          return console.warn(
+            "Introduzca un numero y el porcentaje de descuento"
+          );
+
+        if (typeof numero != "number")
+          return console.error("Los datos introducidos no son numeros");
+
+        if (porcentaje === undefined)
+          return console.warn(
+            "Introduzca cuanto descuento se va a realizar en porcentaje"
+          );
+
+        if (typeof porcentaje != "number")
+          return console.error("Los datos introducidos no son numeros");
+
+        console.log(
+          `Precio base= ${numero}, Descuento= ${porcentaje}%, Precio Final= ${
+            numero - (numero * porcentaje) / 100
+          }`
+        );
+      };
+
+      descuento(1000, 20);
     </script>
   </body>
 </html>
