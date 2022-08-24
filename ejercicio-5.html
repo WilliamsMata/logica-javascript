@@ -52,7 +52,7 @@
       convertir(100, 2);
 
       //Funcion que devuelva el monto final despues de aplicar un descuento a una cantidad data
-      const descuento = (numero = undefined, porcentaje = undefined) => {
+      const descuento = (numero = undefined, porcentaje = 0) => {
         if (numero === undefined)
           return console.warn(
             "Introduzca un numero y el porcentaje de descuento"
@@ -61,15 +61,18 @@
         if (typeof numero != "number")
           return console.error("Los datos introducidos no son numeros");
 
-        if (porcentaje === undefined)
-          return console.warn(
-            "Introduzca cuanto descuento se va a realizar en porcentaje"
-          );
+        if (numero === 0) return console.error(`El numero no puede ser 0`);
+
+        if (Math.sign(numero) === -1)
+          return console.error("El numero no puede ser negativo");
 
         if (typeof porcentaje != "number")
-          return console.error("Los datos introducidos no son numeros");
+          return console.error("El porcentaje no es un numero");
 
-        console.log(
+        if (Math.sign(porcentaje) === -1)
+          return console.error(`El descuento no puede ser negativo`);
+
+        return console.log(
           `Precio base= ${numero}, Descuento= ${porcentaje}%, Precio Final= ${
             numero - (numero * porcentaje) / 100
           }`
@@ -80,8 +83,8 @@
 
       //Funcion que dada una fecha válida determine cuantos años han pasado hasta el día de hoy
 
-      const howOld = (anio = undefined, mes = undefined, fecha = undefined) => {
-        if (anio === undefined || mes === undefined || fecha === undefined)
+      const howOld = (anio = undefined, mes = 1, fecha = 1) => {
+        if (anio === undefined)
           return console.warn(
             `Introduzca desde que fecha quieres calcular hasta la actualidad (año, mes, fecha)`
           );
@@ -93,15 +96,58 @@
         )
           return console.error(`Los datos que introdujo no son numeros.`);
 
+        if (mes <= 0 || fecha <= 0)
+          return console.error(
+            `El mes y/o la fecha no pueden ser cero o negativos`
+          );
+
+        if (fecha > 31)
+          return console.error(`La fecha no puede ser mayor a 31`);
+
+        if (mes > 12) return console.error(`El mes no puede ser mayor a 12`);
+
         let fechaDesde = new Date(anio, mes - 1, fecha);
         let fechaActual = new Date();
-        let msEnAnios = 1000 * 60 * 60 * 24 * 30.416666666668 * 12;
-        let tiempoPasadoAnio = Math.floor(
-          (fechaActual - fechaDesde) / msEnAnios
+
+        if (fechaDesde >= fechaActual)
+          return console.error("La fecha no puede ser mayor al dia actual");
+
+        let msEnDias = 1000 * 60 * 60 * 24;
+        let msEnMes = msEnDias * 30.4166666668;
+        let msEnAnios = msEnMes * 12;
+
+        let tiempoPasadoAnio = (fechaActual - fechaDesde) / msEnAnios;
+        let tiempoPasadoMes = Math.floor(
+          (fechaActual -
+            new Date(fechaActual.getFullYear() - 1, mes - 1, fecha)) /
+            msEnMes
         );
 
-        console.log(
-          `Desde ${fechaDesde.toDateString()} han pasado ${tiempoPasadoAnio} años`
+        if (tiempoPasadoMes === 1 || tiempoPasadoMes - 12 === 1)
+          return console.log(
+            `Desde ${fechaDesde.toDateString()} han pasado ${Math.floor(
+              tiempoPasadoAnio
+            )} años y un mes.`
+          );
+
+        if (tiempoPasadoMes === 0 || tiempoPasadoMes - 12 === 0)
+          return console.log(
+            `Desde ${fechaDesde.toDateString()} han pasado ${Math.floor(
+              tiempoPasadoAnio
+            )} años.`
+          );
+
+        if (tiempoPasadoMes > 12)
+          return console.log(
+            `Desde ${fechaDesde.toDateString()} han pasado ${Math.floor(
+              tiempoPasadoAnio
+            )} años y ${tiempoPasadoMes - 12} meses.`
+          );
+
+        return console.log(
+          `Desde ${fechaDesde.toDateString()} han pasado ${Math.floor(
+            tiempoPasadoAnio
+          )} años y ${tiempoPasadoMes} meses.`
         );
       };
 
