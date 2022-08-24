@@ -77,6 +77,35 @@
       };
 
       descuento(1000, 20);
+
+      //Funcion que dada una fecha válida determine cuantos años han pasado hasta el día de hoy
+
+      const howOld = (anio = undefined, mes = undefined, fecha = undefined) => {
+        if (anio === undefined || mes === undefined || fecha === undefined)
+          return console.warn(
+            `Introduzca desde que fecha quieres calcular hasta la actualidad (año, mes, fecha)`
+          );
+
+        if (
+          typeof anio != "number" ||
+          typeof mes != "number" ||
+          typeof fecha != "number"
+        )
+          return console.error(`Los datos que introdujo no son numeros.`);
+
+        let fechaDesde = new Date(anio, mes - 1, fecha);
+        let fechaActual = new Date();
+        let msEnAnios = 1000 * 60 * 60 * 24 * 30.416666666668 * 12;
+        let tiempoPasadoAnio = Math.floor(
+          (fechaActual - fechaDesde) / msEnAnios
+        );
+
+        console.log(
+          `Desde ${fechaDesde.toDateString()} han pasado ${tiempoPasadoAnio} años`
+        );
+      };
+
+      howOld(1984, 4, 23);
     </script>
   </body>
 </html>
