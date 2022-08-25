@@ -23,6 +23,69 @@
         miFuncion("jonmircha@gmail.com") devolverá verdadero.
       </li>
     </ol>
-    <script></script>
+    <script>
+      //Funcion que dada una cadena de texto cuente el número de vocales y consonantes.
+      const vocalesConsonantes = (texto = "") => {
+        //validando cadena de texto
+        if (!texto)
+          return console.warn(
+            "Introduzca un texto para buscar el numero de vocales y consonantes que contenga"
+          );
+
+        if (typeof texto !== "string")
+          return console.error("Debe introducir una cadena de texto");
+
+        //defino las RegExp de vocales y consonantes.
+        let vocalesRegExp = new RegExp(
+          "[aeiouäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙAEIOU]",
+          "g"
+        );
+        let consonantesRegExp = new RegExp("[bcdfghjklmnñpqrstvwxyz]", "gi");
+
+        //conseguir la cantidad de vocales y consonantes en el texto.
+        let coincidenciaVocales = texto.match(vocalesRegExp).length;
+        let coincidenciaConsonantes = texto.match(consonantesRegExp).length;
+
+        return console.log(
+          `texto: ${texto}, consonantes: ${coincidenciaConsonantes}, vocales: ${coincidenciaVocales}.`
+        );
+      };
+
+      vocalesConsonantes("Hola Mundo");
+
+      //Funcion que valide que un texto sea un nombre Válido.
+      const nombreValido = (nombre = "") => {
+        if (!nombre) return console.warn("Introduzca un nombre para validarlo");
+
+        if (typeof nombre !== "string")
+          return console.error("Introduzca el nombre en una cadena de texto");
+
+        let nombreRegExp =
+          /^([a-zA-ZäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ]+\s?(\s[a-zA-ZäÄëËïÏöÖüÜáéíóúáéíóúÁÉÍÓÚÂÊÎÔÛâêîôûàèìòùÀÈÌÒÙ]+\s?)*)$/g;
+
+        nombreRegExp.test(nombre) === true
+          ? console.log(`${nombre} si es un nombre valido`)
+          : console.log(`${nombre} no es un nombre válido`);
+      };
+
+      nombreValido("Jonathan MirCha");
+
+      //Función que valide que un texto sea un email válido.
+      const comprobarEmail = (email = "") => {
+        if (!email) return console.warn("Introduzca un email para validarlo");
+
+        if (typeof email !== "string")
+          return console.error("Introduzca el email en una cadena de texto");
+
+        let emailRegExp =
+          /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/gi;
+
+        emailRegExp.test(email) === true
+          ? console.log(`El email: "${email}" SÍ es válido`)
+          : console.log(`El email: "${email}" NO es válido`);
+      };
+
+      comprobarEmail("jonmircha@gmail.com");
+    </script>
   </body>
 </html>
